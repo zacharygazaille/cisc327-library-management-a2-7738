@@ -45,7 +45,7 @@ Change the banner to add your name in place of "your name" shown in the image
 
 ### 2. Project Implementation Status
 
-Report your findings in a table with columns function name, implementation status (complete/partial),what is missing (if any) and save in a markdown file named `A1_LastName_last4digitID.md`
+Report your findings in a table with columns function name, implementation status (complete/partial), what is missing (if any) and save in a markdown file named `A1_LastName_last4digitID.md`
 
 
 ### 3. Writing Unit Test
