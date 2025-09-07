@@ -19,6 +19,7 @@ The details of the above tasks are given below.
 
 ### 1. Environment Setup
 
+Make sure you have Python installed and a code editor like VSCode or PyCharm. Then, clone the repository to your local machine.
 
 ```bash
 # Create virtual environment
