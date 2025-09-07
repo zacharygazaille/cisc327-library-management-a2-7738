@@ -53,19 +53,11 @@ Report your findings in a table with columns function name, implementation statu
 - For each function, write at least 4-5 test cases, including positive and negative test cases.
 - Create a separate folder named `tests` and store the test script file there. You may create separate script files for each function
 
-A sample of test script is given in `sample_test.py` file   
+- A sample of test script is given in [`sample_test.py`](sample_test.py) file  
 
 ### 4. Submission
+- See the submission instructions in OnQ.
 
-- In the markdown file, write how to run the project
-- Push your local repository in GitHub
-- Submit the repository link on OnQ under the assignment submission section
-
-
-## Grading Criteria
-1. Successful execution of the web application - 25%
-2. Project implementation status document - 25%
-3. Unit test script files - 50%
  
 
 
