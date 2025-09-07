@@ -6,17 +6,17 @@ This project contains a partial implementation of a Flask-based Library Manageme
 
 Students are provided with:
 
-- `requirements_specification.md`: Complete requirements document with 7 functional requirements (R1-R7)
-- `app.py`: Main Flask application with application factory pattern
-- `routes/`: Modular Flask blueprints for different functionalities
-  - `catalog_routes.py`: Book catalog display and management routes
-  - `borrowing_routes.py`: Book borrowing and return routes  
-  - `api_routes.py`: JSON API endpoints for late fees and search
-  - `search_routes.py`: Book search functionality routes
-- `database.py`: Database operations and SQLite functions
-- `library_service.py`: **Business logic functions** (your main testing focus)
-- `templates/`: HTML templates for the web interface
-- `requirements.txt`: Python dependencies
+- [`requirements_specification.md`](requirements_specification.md): Complete requirements document with 7 functional requirements (R1-R7)
+- [`app.py`](app.py): Main Flask application with application factory pattern
+- [`routes/`](routes/): Modular Flask blueprints for different functionalities
+  - [`catalog_routes.py`](routes/catalog_routes.py): Book catalog display and management routes
+  - [`borrowing_routes.py`](routes/borrowing_routes.py): Book borrowing and return routes
+  - [`api_routes.py`](routes/api_routes.py): JSON API endpoints for late fees and search
+  - [`search_routes.py`](routes/search_routes.py): Book search functionality routes
+- [`database.py`](database.py): Database operations and SQLite functions
+- [`library_service.py`](library_service.py): **Business logic functions** (your main testing focus)
+- [`templates/`](templates/): HTML templates for the web interface
+- [`requirements.txt`](requirements.txt): Python dependencies
 
 ## ❗ Known Issues
 The implemented functions may contain intentional bugs. Students should discover these through unit testing (to be covered in later assignments).
