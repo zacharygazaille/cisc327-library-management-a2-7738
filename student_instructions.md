@@ -39,7 +39,7 @@ python app.py
 ```
 Visit `http://localhost:5000` to see the web interface. 
 
-Change the banner to add your name in place of "your name" shown in the images
+Change the banner to add your name in place of "your name" shown in the image
 
 ![Screenshot showing the banner change](banner.png)
 
