@@ -199,3 +199,12 @@ def update_borrow_record_return_date(patron_id: str, book_id: int, return_date: 
     except Exception as e:
         conn.close()
         return False
+    
+# I have added this function because when I try to test and add a book, it fails because book already exists. without this I would have to switch all the book IDs every time
+def clear_database():
+    """Delete all data from all tables (for testing)."""
+    conn = get_db_connection()
+    conn.execute("DELETE FROM borrow_records")
+    conn.execute("DELETE FROM books")
+    conn.commit()
+    conn.close()

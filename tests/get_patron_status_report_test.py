@@ -14,7 +14,7 @@ def test_patron_status_no_borrowed_book():
     """Test retrieving patron status with no borrowed books"""
     result = get_patron_status_report("123456")
     
-    assert result['currently_borrowed'] == 0
+    assert len(result['currently_borrowed']) == 0
     assert result['total_late_fees'] == 0.0
     assert result['num_currently_borrowed'] == 0
     assert result['history'] == []
