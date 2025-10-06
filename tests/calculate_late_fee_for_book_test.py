@@ -79,3 +79,11 @@ def test_calculate_patron_invalid_book():
 
     assert result['fee_amount'] == 0.0
     assert result['days_overdue'] == 0
+
+def test_calculate_late_fee_no_borrow_record():
+    """Test calculating fees for a book that hasn't been borrowed"""
+    insert_book("Test Book", "Test Author", "1234567890999", 1, 1)
+    book = get_book_by_isbn("1234567890999")
+    result = calculate_late_fee_for_book("123456", book['id'])
+    assert result['fee_amount'] == 0.0
+    assert result['days_overdue'] == 0

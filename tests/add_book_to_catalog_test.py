@@ -83,3 +83,10 @@ def test_add_book_isbn_exists():
     
     assert success == False
     assert "A book with this ISBN already exists." in message
+
+def test_add_book_db_error(monkeypatch):
+    """Test adding a book with a database error."""
+    monkeypatch.setattr("library_service.insert_book", lambda title, author, isbn, total_copies, available_copies: False)
+    success, message = add_book_to_catalog("Test Book", "Test Author", "1234567890995", 1)
+    assert success is False
+    assert "Database error occurred while adding the book." in message

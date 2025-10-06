@@ -173,14 +173,8 @@ def calculate_late_fee_for_book(patron_id: str, book_id: int) -> Dict:
 
     if not borrow_record or 'due_date' not in borrow_record:
         return {'fee_amount': 0.0, 'days_overdue': 0}
-    
-    # Parse due_date if it's a string
+
     due_date = borrow_record['due_date']
-    if isinstance(due_date, str):
-        try:
-            due_date = datetime.fromisoformat(due_date)
-        except Exception:
-            due_date = datetime.strptime(due_date, "%Y-%m-%d %H:%M:%S")
 
     today = datetime.now()
     days_overdue = (today.date() - due_date.date()).days
@@ -203,8 +197,6 @@ def search_books_in_catalog(search_term: str, search_type: str) -> List[Dict]:
     TODO: Implement R6 as per requirements
     """
     search_term = search_term.strip()
-    if not search_term:
-        return []
 
     books = get_all_books()
     results = []
@@ -215,11 +207,9 @@ def search_books_in_catalog(search_term: str, search_type: str) -> List[Dict]:
     elif search_type == "author":
         # Case-insensitive, partial match
         results = [b for b in books if search_term.lower() in b['author'].lower()]
-    elif search_type == "isbn":
+    else:
         # Exact match only
         results = [b for b in books if b['isbn'] == search_term]
-    else:
-        results = []
 
     return results
 
@@ -264,25 +254,12 @@ def get_patron_status_report(patron_id: str) -> Dict:
     now = datetime.now()
 
     for record in all_borrows:
-        # Parse due_date and return_date
         due_date = record['due_date']
-        if isinstance(due_date, str):
-            try:
-                due_date_dt = datetime.fromisoformat(due_date)
-            except Exception:
-                due_date_dt = datetime.strptime(due_date, "%Y-%m-%d %H:%M:%S")
-        else:
-            due_date_dt = due_date
+        due_date_dt = datetime.fromisoformat(due_date)
 
         return_date = record['return_date']
         if return_date:
-            if isinstance(return_date, str):
-                try:
-                    return_date_dt = datetime.fromisoformat(return_date)
-                except Exception:
-                    return_date_dt = datetime.strptime(return_date, "%Y-%m-%d %H:%M:%S")
-            else:
-                return_date_dt = return_date
+            return_date_dt = datetime.fromisoformat(return_date)
         else:
             return_date_dt = None
 

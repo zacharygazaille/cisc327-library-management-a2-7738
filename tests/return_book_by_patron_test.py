@@ -62,3 +62,23 @@ def test_return_book_patron_id_too_long():
     success, message = return_book_by_patron("1234567", book['id'])
     assert success is False
     assert "invalid patron" in message
+
+def test_return_book_db_error(monkeypatch):
+    """Test returning a book with a database error."""
+    insert_book("Test Book", "Test Author", "1234567890999", 1, 1)
+    book = get_book_by_isbn("1234567890999")
+    borrow_book_by_patron("123456", book['id'])
+    monkeypatch.setattr("library_service.update_book_availability", lambda book_id, change: False)
+    success, message = return_book_by_patron("123456", book['id'])
+    assert success is False
+    assert "Database error occured" in message
+
+def test_return_book_db_error_on_return_date(monkeypatch):
+    """Test returning a book with another database error."""
+    insert_book("Test Book", "Test Author", "1234567890998", 1, 1)
+    book = get_book_by_isbn("1234567890998")
+    borrow_book_by_patron("123456", book['id'])
+    monkeypatch.setattr("library_service.update_borrow_record_return_date", lambda patron_id, book_id, return_date: False)
+    success, message = return_book_by_patron("123456", book['id'])
+    assert success is False
+    assert "Database error occured while updating return date." in message
