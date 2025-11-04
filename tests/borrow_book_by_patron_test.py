@@ -1,6 +1,6 @@
 import pytest
 from datetime import datetime, timedelta
-from library_service import (
+from services.library_service import (
     borrow_book_by_patron
 )
 from database import (
@@ -82,7 +82,7 @@ def test_borrow_book_db_error(monkeypatch):
     """Test borrowing a book with a database error"""
     insert_book("Test Book", "Test Author", "1234567890997", 1, 1)
     book = get_book_by_isbn("1234567890997")
-    monkeypatch.setattr("library_service.update_book_availability", lambda book_id, change: False)
+    monkeypatch.setattr("services.library_service.update_book_availability", lambda book_id, change: False)
     success, message = borrow_book_by_patron("123456", book['id'])
     assert success is False
     assert "Database error occurred while updating book availability." in message
@@ -91,7 +91,7 @@ def test_borrow_book_db_error_on_borrow_record(monkeypatch):
     """Test borrowing a book with another database error"""
     insert_book("Test Book", "Test Author", "1234567890996", 1, 1)
     book = get_book_by_isbn("1234567890996")
-    monkeypatch.setattr("library_service.insert_borrow_record", lambda patron_id, book_id, borrow_date, due_date: False)
+    monkeypatch.setattr("services.library_service.insert_borrow_record", lambda patron_id, book_id, borrow_date, due_date: False)
     success, message = borrow_book_by_patron("123456", book['id'])
     assert success is False
     assert "Database error occurred while creating borrow record." in message
