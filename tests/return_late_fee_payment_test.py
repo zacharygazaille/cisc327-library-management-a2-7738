@@ -42,3 +42,24 @@ def test_refund_late_fee_payment_refund_amount_exceeds_15(mocker):
     assert success is False
     assert "exceeds maximum late fee" in message
     gateway.refund_payment.assert_not_called()
+
+def test_refund_late_fee_payment_no_pg(mocker):
+    success, message = refund_late_fee_payment("txn_123456", 1.00, payment_gateway=None)
+    assert success is True # payment gateway will automatically be created and payment will succeed
+    assert "txn_123456" in message
+
+def test_refund_late_fee_payment_failed(mocker):
+    gateway = Mock(spec=PaymentGateway)
+    gateway.refund_payment.return_value = (False, "Insufficient funds")
+    success, message = refund_late_fee_payment("txn_123456", 1.00, payment_gateway=gateway)
+    assert success is False
+    assert "Refund failed" in message
+    gateway.refund_payment.assert_called_once_with("txn_123456", 1.00)
+
+def test_refund_late_fee_payment_error(mocker):
+    gateway = Mock(spec=PaymentGateway)
+    gateway.refund_payment.side_effect = Exception("Network error")
+    success, message = refund_late_fee_payment("txn_123456", 1.00, payment_gateway=gateway)
+    assert success is False
+    assert "Refund processing error" in message
+    gateway.refund_payment.assert_called_once_with("txn_123456", 1.00)
