@@ -1,7 +1,7 @@
 from playwright.sync_api import Playwright, sync_playwright, expect
 
 def test_add_book_and_borrow(playwright: Playwright) -> None:
-    browser = playwright.chromium.launch(headless=False)
+    browser = playwright.chromium.launch(headless=True)
     context = browser.new_context()
     page = context.new_page()
     page.goto("http://127.0.0.1:5000/catalog")
@@ -30,7 +30,7 @@ def test_add_book_and_borrow(playwright: Playwright) -> None:
     browser.close()
 
 def test_add_book_and_search_by_author(playwright: Playwright) -> None:
-    browser = playwright.chromium.launch(headless=False)
+    browser = playwright.chromium.launch(headless=True)
     context = browser.new_context()
     page = context.new_page()
     page.goto("http://127.0.0.1:5000/catalog")
@@ -61,7 +61,7 @@ def test_add_book_and_search_by_author(playwright: Playwright) -> None:
     browser.close()
 
 def test_add_book_borrow_and_return(playwright: Playwright) -> None:
-    browser = playwright.chromium.launch(headless=False)
+    browser = playwright.chromium.launch(headless=True)
     context = browser.new_context()
     page = context.new_page()
     page.goto("http://127.0.0.1:5000/catalog")
